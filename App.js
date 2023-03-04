@@ -1,10 +1,20 @@
-import {View,Text,TextInput,FlatList,Pressable,Button} from 'react-native';
+import {View} from 'react-native';
 import 'expo-dev-client';
 import React,{useEffect, useState} from 'react'; 
+import { useCallback } from 'react';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
 import styles from './styles';
 import {Modal,NewItem,ListItem} from './src/components';
 
+SplashScreen.preventAutoHideAsync();
+
 export default function App() {
+
+  const [fontsLoaded] = useFonts({
+    'Rufina-Regular':require('./assets/fonts/Rufina-Regular.ttf'),
+    'Rufina-Bold':require('./assets/fonts/Rufina-Bold.ttf'),
+  });
 
   const [itemText, setTaskText] = useState("");
   const [tasks, setTasks] = useState([]);
@@ -45,8 +55,18 @@ export default function App() {
     setSelectedTask(null);
   };
 
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
-    <View style={styles.screen}>
+    <View style={styles.screen}  onLayout={onLayoutRootView}>
       <NewItem
         onChangeText={onChangeText}
         onPress={onAddTask}

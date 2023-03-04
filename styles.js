@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     fontSize: 20,
-    fontWeight: "bold",
+    fontFamily:'Rufina-Bold',
     textAlign: "center",
   },
   modalText: {
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   modalBoldText: {
-    fontWeight: "bold",
+    fontFamily:'Rufina-Bold',
     textDecorationLine: "underline",
   },
   modalActions: {
