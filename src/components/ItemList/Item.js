@@ -1,7 +1,6 @@
-import {Text, Pressable } from 'react-native';
+import {Text, Pressable, StyleSheet } from 'react-native';
 import React from 'react';
-import styles from '../../../styles';
-
+import Colors from '../../constants/Colors'
 const Item = ({
     itemData,
     onPress
@@ -23,3 +22,33 @@ const Item = ({
 };
 
 export default Item;
+
+const styles = StyleSheet.create({
+    itemContainer: {
+        marginLeft: 10,
+        marginRight:10,
+        marginTop:8,
+        padding: 5,
+        borderRadius: 5,    
+        backgroundColor:Colors.backgroundItem,    
+      },  
+      item: {
+        marginTop:5,    
+        textAlign: "left",    
+      },
+      badge:{    
+        color:'white',    
+        width:60,
+        height:12,
+        fontSize:9,
+        textAlign:'center',       
+        marginBottom:5,     
+      },
+      badgePending:{        
+        backgroundColor:Colors.badgePending,          
+      },
+      
+      badgeCompleted:{        
+        backgroundColor:Colors.badgeCompleted,          
+      },
+})

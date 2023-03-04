@@ -4,56 +4,39 @@ import React,{useEffect, useState} from 'react';
 import { useCallback } from 'react';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import styles from './styles';
-import {Modal,NewItem,ListItem} from './src/components';
+import WorkQueue from './src/screens/Workqueues';
+import EmptyQueues from './src/screens/Emptyqueues';
+import Header from './src/components/Header';
+import Modal from './src/components/Modal';
 
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
+
+  const [queues, setQueues] = useState([]);
+  const [selectedQueue, setSelectedQueue] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);  
 
   const [fontsLoaded] = useFonts({
     'Rufina-Regular':require('./assets/fonts/Rufina-Regular.ttf'),
     'Rufina-Bold':require('./assets/fonts/Rufina-Bold.ttf'),
   });
 
-  const [itemText, setTaskText] = useState("");
-  const [tasks, setTasks] = useState([]);
-  const [modalVisible, setModalVisible] = useState(false);  
-  const [selectedTask, setSelectedTask] = useState(null);
-  
-  const onChangeText = (text) => {
-    setTaskText(text);
-  };
 
+  const onLoadQueues = () =>{
+    if(queues.length===0) 
+    {
+      setQueues((oldArry)=>[...oldArry,{id:1,value:'Cola de trabajo 1',status:'Pendiente'}]);       
+      setQueues((oldArry)=>[...oldArry,{id:2,value:'Cola de trabajo 2',status:'Pendiente'}]);   
+      setQueues((oldArry)=>[...oldArry,{id:3,value:'Cola de trabajo 3',status:'Pendiente'}]);   
+      setQueues((oldArry)=>[...oldArry,{id:4,value:'Cola de trabajo 4',status:'Pendiente'}]);   
+    }
+  }
   // Cada vez que hay un cambio en las variables, crea log en la terminal
-  // useEffect(()=> {
-  //   console.log("useEffect","Item Text:",itemText,", Items:",tasks)
-  // },[itemText,tasks])
+  useEffect(()=> {
+    console.log(queues);
+  },[queues])
 
-  const onAddTask = () => {    
-    setTasks((oldArry)=>[...oldArry,{id:Date.now(),value:itemText,status:'Pendiente'}]);     
-    setTaskText("");
-  };
-
-  const onSelectTask = (item) => {
-    setSelectedTask(item);
-    setModalVisible(true);
-  };
-  
-  const onCompletedTask = (id) =>{        
-    tasks.find(item => {return item.id === id;}).status = "Completada";
-    onCloseModal();
-  };
-  
-  const onDeleteTask = (id) => {        
-    setTasks(tasks.filter(item => {return item.id != id;}));
-    onCloseModal();    
-  };
-
-  const onCloseModal = () => {
-    setModalVisible(!modalVisible);
-    setSelectedTask(null);
-  };
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
@@ -65,28 +48,37 @@ export default function App() {
     return null;
   }
 
-  return (
-    <View style={styles.screen}  onLayout={onLayoutRootView}>
-      <NewItem
-        onChangeText={onChangeText}
-        onPress={onAddTask}
-        placeholder="Nombre de la tarea"
-        itemText={itemText}
-      />  
+  const onPressQueue = (item) => {
+    setSelectedQueue(item);
+    setModalVisible(true);
+  }
 
-     <ListItem 
-        items={tasks}
-        onPressItem={onSelectTask}
-     />
+  const onCloseModal = () => {
+    setModalVisible(!modalVisible);
+    setSelectedQueue(null);
+  };  
+
+  const onBeginQueue = (id) => {
+    setModalVisible(!modalVisible);
+    queues.find(item => {return item.id === id;}).status = "Iniciada";
+  };
+
+
+  return (
+    <View  onLayout={onLayoutRootView}>
+      <Header title = 'Colas de Trabajo' />
+      {
+        queues.length>0 ? 
+          <WorkQueue queues={queues} onPressQueues={onPressQueue} /> : 
+          <EmptyQueues onPressLoadQueues={onLoadQueues} /> 
+      }      
 
       <Modal
         modalVisible={modalVisible}        
-        selectedItem = {selectedTask}
-        onCancelModal = {onCloseModal}
-        onDeleteModal = {onDeleteTask}
-        onConfirmModal = {onCompletedTask}   
+        selectedItem = {selectedQueue}
+        onCancelModal = {onCloseModal}        
+        onConfirmModal = {onBeginQueue}   
       />
-
     </View>
   );
 }
