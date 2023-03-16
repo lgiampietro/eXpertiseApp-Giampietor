@@ -1,13 +1,16 @@
 import React from 'react';
 import {FlatList} from 'react-native';
 import {DATA} from '../data/data';
+import GridItem from './../components/GridItem';
 
 const WorkQueues = ({ navigation }) => {
 
     const onSelectGridItem = (item) => {
+        
         navigation.navigate('Queue', {
-            categoryId: item.id,
-            categoryName: item.name
+            id: item.id,
+            name: item.name,
+            status: item.status
         })
     }
 

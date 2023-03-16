@@ -1,25 +1,23 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, { useEffect } from 'react'
 
-const QueuesScreen = ({ route, navigation }) => {
-
-    const { queue } = route.params
+const QueuesScreen = ({ route, navigation }) => {  
 
     useEffect(() => {
         navigation.setOptions({
-          title: queue.name
+           title: route.params.name
         })
       },[])
 
     return (
         <View style={styles.screen}>
-        <Text>Id:{" "}{bread.price}</Text>
-        <Text style={styles.title}>Cola de trabajo: {" "} {queue.name}</Text>        
-        <Text>Estoad:{" "}{queue.status}</Text>
+        <Text>Id:{" "}{route.params.id}</Text>
+        <Text style={styles.title}>Cola de trabajo: {" "} {route.params.name}</Text>        
+        <Text>Estoad:{" "}{route.params.status}</Text>
     
       </View>
     )
-};
+}
 
 export default QueuesScreen;
 

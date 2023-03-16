@@ -7,7 +7,7 @@ import ButtonCustom from './../components/ButtonCustom';
 const EmptyQueues = ({navigation}) => {
     
     const onPressLoadQueues = () => {
-        navigation.navigate('Work')
+        navigation.navigate('List')
       }
 
     return (

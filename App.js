@@ -1,7 +1,7 @@
 import React from 'react'; 
 import {useFonts, Rufina_400Regular,Rufina_700Bold} from '@expo-google-fonts/rufina';
 import * as SplashScreen from 'expo-splash-screen';
-import QueuesNavigator from './navigation/QueuesNavigator';
+import QueuesNavigator from './src/navigators/QueuesNavigator';
 
 SplashScreen.preventAutoHideAsync();
 
