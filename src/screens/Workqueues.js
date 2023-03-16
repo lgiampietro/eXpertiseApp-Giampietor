@@ -1,35 +1,25 @@
 import React from 'react';
-import {View,StyleSheet, Text} from 'react-native';
-import { subTitleStyle } from '../constants/TextStyles';
-import ListItem from './../components/ItemList/ListItem';
-import Colors from '../constants/Colors';
+import {FlatList} from 'react-native';
+import {DATA} from '../data/data';
 
-const WorkQueues = ({
-    queues,
-    onPressQueues
-}) => {
+const WorkQueues = ({ navigation }) => {
+
+    const onSelectGridItem = (item) => {
+        navigation.navigate('Queue', {
+            categoryId: item.id,
+            categoryName: item.name
+        })
+    }
+
+    const renderGridItem = ({ item }) => <GridItem item={item} onSelect={onSelectGridItem} />
+
     return (
-        <View>
-           
-            <View style={styles.container}>
-                <Text style={styles.subtitle}>Listado de colas de trabajo</Text>       
-                <ListItem 
-                    items={queues}
-                    onPressItem={onPressQueues}
-                />
-            </View>
-        </View>
+        <FlatList
+            data={DATA}
+            keyExtractor={(item) => item.id}
+            renderItem={renderGridItem}        
+        />
     )
 };
 
 export default WorkQueues;
-
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor:Colors.screen,        
-        padding: 10,                  
-    },
-    subtitle:{
-        ...subTitleStyle
-    }
-})

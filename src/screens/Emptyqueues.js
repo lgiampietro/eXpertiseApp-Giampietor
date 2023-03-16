@@ -4,17 +4,16 @@ import ButtonCustom from './../components/ButtonCustom';
 
 
 
-const EmptyQueues = ({
-    onPressLoadQueues
-}) => {
+const EmptyQueues = ({navigation}) => {
+    
+    const onPressLoadQueues = () => {
+        navigation.navigate('Work')
+      }
+
     return (
         <View>
            
             <View style={styles.container}>
-             <Image 
-                style={styles.image}
-                source={require('../img/bed.png')}
-             />   
              <ButtonCustom 
                 title='Cargar colas de trabajo'
                 onPress={onPressLoadQueues}
