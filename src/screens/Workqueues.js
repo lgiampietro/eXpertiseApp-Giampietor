@@ -1,7 +1,7 @@
 import React from 'react';
 import {FlatList} from 'react-native';
 import {DATA} from '../data/data';
-import GridItem from './../components/GridItem';
+import GridItem from '../components/GridItem';
 
 const WorkQueues = ({ navigation }) => {
 
