@@ -5,7 +5,16 @@ import {FlatList} from 'react-native';
 import { COMPLETED } from './../data/completed';
 import GridItem from '../components/GridItem';
 
-const renderGridItem = ({ item }) => <GridItem item={item} />
+const onSelectGridItem = (item) => {
+        
+    navigation.navigate('Queue', {
+        id: item.id,
+        name: item.name,
+        status: item.status
+    })
+}
+
+const renderGridItem = ({ item }) => <GridItem item={item}  onSelect={onSelectGridItem} />
 
 const CompletedQueues = () => {
     return (
