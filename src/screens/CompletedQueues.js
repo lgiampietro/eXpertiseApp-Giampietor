@@ -1,8 +1,7 @@
-import { StyleSheet,Text,View } from "react-native";
 import React from "react";
 import {FlatList} from 'react-native';
 
-import { COMPLETED } from './../data/completed';
+import { COMPLETED } from '../data/queuesList';
 import GridItem from '../components/GridItem';
 
 const onSelectGridItem = (item) => {

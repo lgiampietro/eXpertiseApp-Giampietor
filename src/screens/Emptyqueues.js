@@ -1,41 +1,33 @@
 import React from 'react';
-import {View,StyleSheet,Image} from 'react-native';
-import ButtonCustom from './../components/ButtonCustom';
-
-
+import { FlatList } from 'react-native'
+import { useSelector,useDispatch } from 'react-redux'
+import GridItem from './../components/GridItem';
+import { selectStatus } from '../store/actions/status.action';
 
 const EmptyQueues = ({navigation}) => {
     
-    const onPressLoadQueues = () => {
-        navigation.navigate('List')
-      }
+    const statuses = useSelector(state=>state.statuses.statuses)
+    const dispatch = useDispatch()    
 
-    return (
-        <View>
-           
-            <View style={styles.container}>
-             <ButtonCustom 
-                title='Cargar colas de trabajo'
-                onPress={onPressLoadQueues}
-             />    
+    const onSelectedSatus = (item) => {
+        dispatch(selectStatus(item.id))        
+        navigation.push("List",{name:item.name})  
+    }
 
-            </View>
-        </View>
+    const renderGridItem = ({item}) =>{
+        return(
+            <GridItem item={item} onSelect={onSelectedSatus} />
+        )
+    }
+
+    return (        
+        <FlatList 
+            data={statuses}
+            renderItem={renderGridItem}
+            keyExtractor={item=>item.id}
+            numColumns={1}
+        />
     )
 };
 
 export default EmptyQueues;
-
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor:'white',        
-        padding: 10,                          
-    },
-    image:{        
-        height:300, 
-        width:300,
-        marginBottom:20,
-        resizeMode:'stretch',
-        alignSelf:'center'
-    }
-})

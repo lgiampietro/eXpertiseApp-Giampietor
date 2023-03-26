@@ -10,7 +10,7 @@ const GridItem = ({
     <View style={styles.gridItem}>
         <TouchableOpacity onPress={() => onSelect(item)} style={[styles.container, { backgroundColor: item.color}]}>
             <View>
-            <Text style={styles.title}>{item.name}</Text>
+                <Text style={styles.title}>{item.name}</Text>
             </View>
         </TouchableOpacity>
     </View>
@@ -40,5 +40,6 @@ const styles = StyleSheet.create({
     },
     title: {
         fontFamily: 'Rufina_700Bold',
+        color:'white',
     }
 })

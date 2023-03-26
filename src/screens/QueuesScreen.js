@@ -1,20 +1,16 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+
 
 const QueuesScreen = ({ route, navigation }) => {  
+    const queue = useSelector(state=>state.queuesList.selected)
 
-    useEffect(() => {
-        navigation.setOptions({
-           title: route.params.name
-        })
-      },[])
 
     return (
         <View style={styles.screen}>
-        <Text>Id:{" "}{route.params.id}</Text>
-        <Text style={styles.title}>Cola de trabajo: {" "} {route.params.name}</Text>        
-        <Text>Estoad:{" "}{route.params.status}</Text>
-    
+        <Text>Id:{" "}{queue.id}</Text>
+        <Text style={styles.title}>Cola de trabajo: {" "} {queue.name}</Text>   
       </View>
     )
 }

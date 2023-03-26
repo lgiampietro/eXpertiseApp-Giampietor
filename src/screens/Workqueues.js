@@ -1,16 +1,27 @@
-import React from 'react';
-import {FlatList} from 'react-native';
-import {DATA} from '../data/data';
+import React, {useEffect} from 'react';
+import { FlatList} from 'react-native';
+import { useSelector, useDispatch } from 'react-redux'
 import GridItem from '../components/GridItem';
+import { selectQueue,filterQueues } from '../store/actions/queues.action'
 
 const WorkQueues = ({ navigation }) => {
+    
+    const status = useSelector(state=>state.statuses.selected)
+    const queues = useSelector(state=>state.queuesList.filterQueues)
+    
+    const dispatch = useDispatch()
+    
 
-    const onSelectGridItem = (item) => {
+    useEffect(()=>{                
         
-        navigation.navigate('Queue', {
-            id: item.id,
-            name: item.name,
-            status: item.status
+        dispatch(filterQueues(status.id))    
+        console.log(queues);
+    },[])
+
+    const onSelectGridItem = (item) => {        
+        dispatch(selectQueue(item.id))
+        navigation.navigate('Queue', {            
+            name: item.name            
         })
     }
 
@@ -18,7 +29,7 @@ const WorkQueues = ({ navigation }) => {
 
     return (
         <FlatList
-            data={DATA}
+            data={queues}
             keyExtractor={(item) => item.id}
             renderItem={renderGridItem}        
         />

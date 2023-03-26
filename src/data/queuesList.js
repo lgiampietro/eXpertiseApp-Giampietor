@@ -2,25 +2,31 @@ export const DATA = [
     {
         id: '1',
         name:'Mora temprana',
-        status:'Pendiente',
-        color:'#ffd700'
+        statusId:'2'
     },
     {
         id: '2',
         name:'Mora tardia',
-        status:'Pendiente',
-        color:'#ffd700'
+        statusId:'2'
     },
     {
         id: '3',
         name:'Nuevos deudores',
-        status:'Pendiente',
-        color:'#ffd700'    
+        statusId:'1', 
     },
     {
         id: '4',
         name:'Promo sin intereses ',
-        status:'Pendiente',
-        color:'#ffd700'    
+        statusId:'1'
+    },
+    {
+        id: '5',
+        name:'Promo Tasa 0%',
+        statusId:'3'
+    },
+    {
+        id: '6',
+        name:'Mora',
+        statusId:'3'
     }
 ]
