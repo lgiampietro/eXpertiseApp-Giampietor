@@ -40,6 +40,5 @@ const styles = StyleSheet.create({
     },
     title: {
         fontFamily: 'Rufina_700Bold',
-        color:'white',
     }
 })

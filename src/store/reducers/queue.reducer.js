@@ -1,8 +1,8 @@
-import {QUEUESLIST} from '../../data/queuesList'
+import {DATA} from '../../data/queuesList'
 import {SELECT_QUEUE,FILTER_QUEUES} from '../actions/queues.action'
 
 const initialState = {
-    queues:QUEUESLIST,
+    queues:DATA,
     filterQueues:[],
     selected:null
 }
@@ -15,10 +15,11 @@ const QueuesReducer = (state=initialState,action)=>{
                 ...state,
                 selected: state.queues.find(queue=>queue.id ===action.queueId)
             }
-        case FILTER_QUEUES:            
+        case FILTER_QUEUES:         
+            const filter = state.queues.filter(queue=>queue.statusId ===action.statusId)
             return {
                 ...state, 
-                filterQueues: state.queues.filter(queue=>queue.statusId ===action.statusId)
+                filterQueues: filter            
             }
         default:
             return state

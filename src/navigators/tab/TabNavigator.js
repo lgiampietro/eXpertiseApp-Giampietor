@@ -27,7 +27,7 @@ const TabNavigator = () => {
               }}
             />
 
-            <BottomTabs.Screen name="Completada" component={CompletedNavigator}
+            {/* <BottomTabs.Screen name="Completada" component={CompletedNavigator}
                 options={{
                     tabBarIcon: ({ focused }) => (
                     <View style={styles.tabBarIcon}>
@@ -36,7 +36,7 @@ const TabNavigator = () => {
                     </View>
                 )
               }}
-            />
+            /> */}
 
         </BottomTabs.Navigator>
     )

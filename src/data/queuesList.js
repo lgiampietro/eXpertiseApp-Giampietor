@@ -12,7 +12,7 @@ export const DATA = [
     {
         id: '3',
         name:'Nuevos deudores',
-        statusId:'1', 
+        statusId:'1'
     },
     {
         id: '4',

@@ -11,11 +11,8 @@ const WorkQueues = ({ navigation }) => {
     
     const dispatch = useDispatch()
     
-
-    useEffect(()=>{                
-        
-        dispatch(filterQueues(status.id))    
-        console.log(queues);
+    useEffect(()=>{                        
+        dispatch(filterQueues(status.id))            
     },[])
 
     const onSelectGridItem = (item) => {        
